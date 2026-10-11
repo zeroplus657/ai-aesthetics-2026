@@ -31,6 +31,7 @@ function syncMotion(){
   motionButton.disabled=preference.matches;
   motionButton.title=preference.matches?'跟随系统减少动态效果':enabled?'关闭本页动态效果':'开启本页动态效果';
   syncOrbit();
+  document.dispatchEvent(new Event('aesthetics:motion'));
 }
 motionButton.hidden=false;
 motionButton.addEventListener('click',()=>{paused=!paused;syncMotion();});

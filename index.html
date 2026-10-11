@@ -8,14 +8,15 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; frame-src https://zeroplus657.github.io https://biaojvsearch.com; object-src 'none'; base-uri 'self'">
   <title>AI时代的审美与网页设计</title>
-  <link rel="icon" href="./assets/emblem.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=2">
-  <script defer src="./app.js?v=2"></script>
+  <link rel="icon" href="./assets/codex-robot.png" type="image/png">
+  <link rel="stylesheet" href="./style.css?v=3">
+  <script defer src="./app.js?v=3"></script>
+  <script defer src="./statue.js?v=3"></script>
 </head>
 <body>
   <a class="skip-link" href="#introduction">跳至正文</a>
   <header class="site-header">
-    <a href="#top" class="wordmark" aria-label="回到开头"><img src="./assets/emblem.svg" width="32" height="32" alt=""><span>审美与网页设计</span></a>
+    <a href="#top" class="wordmark" aria-label="回到开头"><img class="site-mascot" src="./assets/codex-robot.png" width="54" height="52" alt="Codex小机器人"><span>审美与网页设计</span></a>
     <nav aria-label="章节导航"><a href="#introduction">01 <span>投入</span></a><a href="#cases">02 <span>风格</span></a><a href="#perspective">03 <span>表达</span></a></nav>
     <button id="motion-toggle" class="motion-button" type="button" aria-pressed="true" hidden>动态：开</button>
   </header>
@@ -29,11 +30,12 @@
       <div class="hero-art" aria-hidden="true">
         <img src="./assets/monument.svg" width="1100" height="760" alt="">
         <svg class="orbit-layer" viewBox="0 0 1100 760" fill="none">
-          <defs><clipPath id="robot-window"><circle r="43"/></clipPath></defs>
           <g id="orbit-traveler" transform="translate(922.84 146.50)">
-            <g class="robot-capsule">
-              <circle r="46" fill="#eee9db" stroke="#9c7255" stroke-width="1.2"/>
-              <image class="codex-robot" href="./assets/codex-robot.png" x="-42" y="-40" width="84" height="80" clip-path="url(#robot-window)"/>
+            <g class="orbit-portrait">
+              <svg x="-45" y="-57" width="90" height="123" viewBox="0 0 368 502">
+                <defs><clipPath id="tibo-silhouette"><path d="M161 9C205 0 242 8 278 24C318 42 340 69 352 109C367 151 369 197 356 239C351 268 340 285 331 305L329 322C321 339 307 347 287 345L279 369L282 409L269 437C251 448 236 455 218 456L158 448L118 427C86 423 64 414 49 397C33 379 29 357 25 340L24 318L27 303L23 285L25 263L27 242L34 219L24 200C19 177 25 148 37 121C53 88 83 62 119 35C131 22 145 15 161 9Z"/></clipPath></defs>
+                <image href="./assets/tibo-portrait.png" width="368" height="502" clip-path="url(#tibo-silhouette)"/>
+              </svg>
             </g>
           </g>
         </svg>
@@ -45,8 +47,8 @@
       <div class="section-heading"><h2 id="intro-title">玩 AI，<br>需要多少钱？</h2></div>
 
       <div class="usage" aria-label="个人token用量">
-        <div class="usage-item"><span class="metric-label">Codex</span><p><strong>146.1</strong><span>亿 tokens</span></p></div>
-        <div class="usage-item"><span class="metric-label">Claude Code</span><p><strong>143</strong><span>亿 tokens</span></p></div>
+        <div class="usage-item"><img class="product-icon" src="./assets/codex-desktop.png" width="76" height="76" alt="Codex"><p><strong>146.1</strong><span>亿 tokens</span></p></div>
+        <div class="usage-item"><img class="product-icon" src="./assets/claude-desktop.png" width="76" height="76" alt="Claude Code"><p><strong>143</strong><span>亿 tokens</span></p></div>
       </div>
 
       <div class="ledger">
@@ -86,15 +88,7 @@
         <h2 id="perspective-title">什么是<br><span>AI时代的审美</span><span>与网页设计？</span></h2>
         <div class="perspective-content">
           <blockquote>在合适的<span>情景</span>下，<br>向合适的<span>人</span>，<br>传达合适的<span>信息</span>。</blockquote>
-          <svg class="perspective-sky" viewBox="0 0 400 360" fill="none" aria-hidden="true">
-            <circle cx="205" cy="174" r="123" fill="#b44432"/>
-            <path d="M82 176a123 123 0 0 0 246 0Z" fill="#a33b2b"/>
-            <ellipse cx="205" cy="174" rx="194" ry="56" transform="rotate(-25 205 174)" stroke="#9c7255" stroke-width="1.2"/>
-            <ellipse cx="205" cy="174" rx="186" ry="48" transform="rotate(-25 205 174)" stroke="#9c7255" stroke-width=".6"/>
-            <circle cx="54" cy="258" r="10" fill="#d4a24c"/>
-            <path d="M349 26v38m-19-19h38M45 104v24m-12-12h24" stroke="#a33b2b" stroke-width="1.5"/>
-            <path d="M251 331h112m-77-12h50" stroke="#9ba189"/>
-          </svg>
+          <div class="statue-scene"><canvas id="motherland-model" width="720" height="1120" role="img" aria-label="祖国母亲在召唤：举剑、伸臂与迎风衣褶的低多边形雕塑模型">祖国母亲在召唤的低多边形雕塑模型</canvas></div>
         </div>
         <p class="closing-line">先想清楚读者，<br>再决定风格。</p>
       </div>
