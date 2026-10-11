@@ -9,13 +9,13 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; frame-src https://zeroplus657.github.io https://biaojvsearch.com; object-src 'none'; base-uri 'self'">
   <title>AI时代的审美与网页设计</title>
   <link rel="icon" href="./assets/emblem.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=1">
-  <script type="module" src="./app.js?v=1"></script>
+  <link rel="stylesheet" href="./style.css?v=2">
+  <script defer src="./app.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#introduction">跳至正文</a>
   <header class="site-header">
-    <a href="#top" class="wordmark" aria-label="回到开头"><img src="./assets/emblem.svg" width="32" height="32" alt=""><span>审美与网页设计<small>A FIELD NOTE ON AI</small></span></a>
+    <a href="#top" class="wordmark" aria-label="回到开头"><img src="./assets/emblem.svg" width="32" height="32" alt=""><span>审美与网页设计</span></a>
     <nav aria-label="章节导航"><a href="#introduction">01 <span>投入</span></a><a href="#cases">02 <span>风格</span></a><a href="#perspective">03 <span>表达</span></a></nav>
     <button id="motion-toggle" class="motion-button" type="button" aria-pressed="true" hidden>动态：开</button>
   </header>
@@ -23,79 +23,83 @@
   <main id="top">
     <section class="hero" aria-labelledby="main-title">
       <div class="hero-copy">
-        <p class="eyebrow">给北大与清华的科幻同好 · 一次个人实践分享</p>
         <h1 id="main-title"><span class="hero-ai">AI时代的</span><span>审美与</span><span class="hero-last">网页设计<span class="title-star" aria-hidden="true">✦</span></span></h1>
-        <p class="hero-lede">从投入多少，到选择什么风格。<br>最后，回到一个问题：<strong>这页，是给谁看的？</strong></p>
         <a class="text-link hero-link" href="#introduction">从一张账单说起 <span aria-hidden="true">↓</span></a>
       </div>
-      <div class="hero-art" aria-hidden="true"><img src="./assets/monument.svg" width="1100" height="760" alt=""></div>
-      <div class="hero-caption" aria-hidden="true"><span>HUMAN / MACHINE / IMAGINATION</span><span>01—03</span></div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="./assets/monument.svg" width="1100" height="760" alt="">
+        <svg class="orbit-layer" viewBox="0 0 1100 760" fill="none">
+          <defs><clipPath id="robot-window"><circle r="43"/></clipPath></defs>
+          <g id="orbit-traveler" transform="translate(922.84 146.50)">
+            <g class="robot-capsule">
+              <circle r="46" fill="#eee9db" stroke="#9c7255" stroke-width="1.2"/>
+              <image class="codex-robot" href="./assets/codex-robot.png" x="-42" y="-40" width="84" height="80" clip-path="url(#robot-window)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
     </section>
 
-    <div class="chapter-strip" aria-hidden="true"><span>工具的投入</span><i>✦</i><span>风格的选择</span><i>✦</i><span>表达的对象</span></div>
-
     <section class="chapter introduction" id="introduction" aria-labelledby="intro-title">
-      <div class="section-label"><span class="section-number">01</span><span>INTRODUCTION / 投入</span></div>
-      <div class="section-heading"><h2 id="intro-title">玩 AI，<br>需要多少钱？</h2><p>先摊开我的账单。<br>除了订阅，还有每天投入的时间。</p></div>
+      <div class="section-label"><span class="section-number">01</span><span>投入</span></div>
+      <div class="section-heading"><h2 id="intro-title">玩 AI，<br>需要多少钱？</h2></div>
 
       <div class="usage" aria-label="个人token用量">
-        <div class="usage-item"><span class="metric-label">CODEX</span><p><strong>146.1</strong><span>亿</span></p><span class="metric-unit">tokens · 个人用量</span></div>
-        <div class="usage-item"><span class="metric-label">CLAUDE CODE</span><p><strong>143</strong><span>亿</span></p><span class="metric-unit">tokens · 个人用量</span></div>
-        <div class="usage-mark" aria-hidden="true"><span>人</span><span>与</span><span>机</span><b>✳</b></div>
+        <div class="usage-item"><span class="metric-label">Codex</span><p><strong>146.1</strong><span>亿 tokens</span></p></div>
+        <div class="usage-item"><span class="metric-label">Claude Code</span><p><strong>143</strong><span>亿 tokens</span></p></div>
       </div>
 
       <div class="ledger">
         <div class="total"><span class="eyebrow">我的每月支出</span><p><span class="currency">$</span><strong>365</strong><span class="per-month">/ 月</span></p><span class="rmb">约 ¥2,500 人民币</span></div>
         <table class="expense-table"><caption class="sr-only">个人每月费用明细，单位为美元</caption><thead><tr><th scope="col">项目</th><th scope="col">每月 / USD</th></tr></thead><tbody><tr><th scope="row">Claude Code</th><td>$250</td></tr><tr><th scope="row">Codex</th><td>$100</td></tr><tr><th scope="row">网络安全费用</th><td>$15</td></tr><tr class="expense-total"><th scope="row">合计</th><td>$365</td></tr></tbody></table>
       </div>
-      <div class="time-investment"><span class="time-symbol" aria-hidden="true">◷</span><p>每天投入<strong>8—12<span>小时</span></strong></p><span class="time-caption">时间，也是这张账单的一部分。</span></div>
-      <p class="fine-print">以上为我的个人用量与支出口径，并非官方套餐报价；人民币金额为粗略折算。</p>
+      <div class="time-investment"><span class="time-symbol" aria-hidden="true">◷</span><p>每天投入<strong>8—12<span>小时</span></strong></p></div>
     </section>
 
     <section class="cases" id="cases" aria-labelledby="cases-title">
-      <div class="chapter cases-heading"><div class="section-label"><span class="section-number">02</span><span>FRONT-END / 风格</span></div><div class="section-heading"><h2 id="cases-title">同样是网页，<br>不必长成同一种样子。</h2><p>两个实际项目。<br>两种情景，两套视觉语言。</p></div></div>
+      <div class="chapter cases-heading"><div class="section-label"><span class="section-number">02</span><span>风格</span></div><div class="section-heading"><h2 id="cases-title">同样是网页，<br>不必长成同一种样子。</h2></div></div>
 
       <article class="case-study case-blue" aria-labelledby="blue-title">
-        <div class="case-heading"><div><p class="eyebrow">案例 01 / 一起出游的同学</p><h3 id="blue-title">P3R：<span class="phrase">给出游一点兴奋感。</span></h3></div><span class="case-index" aria-hidden="true">A</span></div>
-        <p class="case-copy">出游的网页，可以先让人感到轻松愉快。动态摇晃、阴影格点和高对比蓝，让一份行程也有了游戏界面的节奏。</p>
+        <div class="case-heading"><h3 id="blue-title">P3R：<span class="phrase">给出游一点兴奋感。</span></h3></div>
         <ul class="style-notes" aria-label="出游网页的设计要素"><li>动态摇晃</li><li>阴影格点</li><li>高对比蓝</li></ul>
         <div class="browser-frame" data-preview="outing">
           <div class="browser-toolbar"><span class="browser-label"><i aria-hidden="true"></i>10.10 · 北京一日出行</span><div class="browser-actions"><button type="button" class="interact-button" aria-pressed="false" aria-controls="outing-frame">操作网页</button><a href="https://zeroplus657.github.io/beijing-outing-2026/" target="_blank" rel="noopener noreferrer">打开原站 <span aria-hidden="true">↗</span></a></div></div>
           <div class="frame-viewport" inert><iframe id="outing-frame" title="案例一：P3R风格的北京一日出行网页" src="https://zeroplus657.github.io/beijing-outing-2026/" loading="lazy" tabindex="-1" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
-          <p class="frame-hint" aria-live="polite">实时内嵌 · 点“操作网页”后可在框内滚动。</p>
+          <p class="frame-hint sr-only" aria-live="polite">实时内嵌 · 点“操作网页”后可在框内滚动。</p>
         </div>
       </article>
 
       <article class="case-study case-landscape" aria-labelledby="landscape-title">
-        <div class="case-heading"><div><p class="eyebrow">案例 02 / 学术共同体内的成员</p><h3 id="landscape-title">中式山水：<span class="phrase">另一种阅读的节奏。</span></h3></div><span class="case-index" aria-hidden="true">B</span></div>
-        <p class="case-copy">这是一个数据库工作。论语瀑布、山川河流和中式复古的视觉元素，为文献查阅提供另一种界面。这里放弃常见的分屏，以向下滑动的方式照顾手机上的浏览。</p>
+        <div class="case-heading"><h3 id="landscape-title">中式山水：<span class="phrase">另一种阅读的节奏。</span></h3></div>
         <ul class="style-notes" aria-label="文献库的设计要素"><li>论语瀑布</li><li>山川河流</li><li>纵向浏览</li></ul>
         <div class="browser-frame" data-preview="library">
-          <div class="browser-toolbar"><span class="browser-label"><i aria-hidden="true"></i>镖局 · 社会学文献库</span><div class="browser-actions"><button type="button" class="interact-button" aria-pressed="false" aria-controls="library-frame">操作网页</button><a href="https://biaojvsearch.com/lib/" target="_blank" rel="noopener noreferrer">打开原站 <span aria-hidden="true">↗</span></a></div></div>
+          <div class="browser-toolbar"><span class="browser-label"><i aria-hidden="true"></i>文献库 · 需原站验证</span><div class="browser-actions"><button type="button" class="interact-button" aria-pressed="false" aria-controls="library-frame">操作网页</button><a href="https://biaojvsearch.com/lib/" target="_blank" rel="noopener noreferrer">打开原站 <span aria-hidden="true">↗</span></a></div></div>
           <div class="frame-viewport" inert><iframe id="library-frame" title="案例二：中式山水风格文献库，原站设有访问验证" src="https://biaojvsearch.com/lib/" loading="lazy" tabindex="-1" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
-          <p class="frame-hint" aria-live="polite">实时内嵌 · 点“操作网页”后可在框内滚动。</p>
+          <p class="frame-hint sr-only" aria-live="polite">实时内嵌 · 点“操作网页”后可在框内滚动。</p>
         </div>
-        <p class="access-note">文献库设有访问验证；若内嵌窗口停留在验证页，请打开原站，按本人访问权限进入。</p>
       </article>
     </section>
 
     <section class="perspective" id="perspective" aria-labelledby="perspective-title">
       <div class="chapter">
-        <div class="section-label"><span class="section-number">03</span><span>PERSPECTIVE / 表达</span></div>
+        <div class="section-label"><span class="section-number">03</span><span>表达</span></div>
         <h2 id="perspective-title">什么是<br><span>AI时代的审美</span><span>与网页设计？</span></h2>
-        <p class="perspective-intro">我的理解是——</p>
-        <blockquote>在合适的<span>情景</span>下，<br>向合适的<span>人</span>，<br>传达合适的<span>信息</span>。</blockquote>
-        <div class="perspective-star" aria-hidden="true">✳</div>
-        <p class="perspective-copy">今天面对科幻同好，我选择 mid-century modern 的温暖几何，混合苏联时代建筑与航天美术的雄伟感。出游时，用轻快的 P3R；面对学术共同体，则用中式山水组织数据库的阅读体验。</p>
-        <div class="design-contexts">
-          <div><span class="context-label">今天的分享</span><h3>科幻同好</h3><p>Mid-century modern<br>× 苏联时代的奇观美术</p></div>
-          <div><span class="context-label">一次出游</span><h3>同行的朋友</h3><p>P3R 高对比蓝<br>× 轻松愉快的动效</p></div>
-          <div><span class="context-label">一个数据库</span><h3>学术共同体</h3><p>中式山水复古<br>× 手机端纵向阅读</p></div>
+        <div class="perspective-content">
+          <blockquote>在合适的<span>情景</span>下，<br>向合适的<span>人</span>，<br>传达合适的<span>信息</span>。</blockquote>
+          <svg class="perspective-sky" viewBox="0 0 400 360" fill="none" aria-hidden="true">
+            <circle cx="205" cy="174" r="123" fill="#b44432"/>
+            <path d="M82 176a123 123 0 0 0 246 0Z" fill="#a33b2b"/>
+            <ellipse cx="205" cy="174" rx="194" ry="56" transform="rotate(-25 205 174)" stroke="#9c7255" stroke-width="1.2"/>
+            <ellipse cx="205" cy="174" rx="186" ry="48" transform="rotate(-25 205 174)" stroke="#9c7255" stroke-width=".6"/>
+            <circle cx="54" cy="258" r="10" fill="#d4a24c"/>
+            <path d="M349 26v38m-19-19h38M45 104v24m-12-12h24" stroke="#a33b2b" stroke-width="1.5"/>
+            <path d="M251 331h112m-77-12h50" stroke="#9ba189"/>
+          </svg>
         </div>
         <p class="closing-line">先想清楚读者，<br>再决定风格。</p>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><a class="wordmark" href="#top"><img src="./assets/emblem.svg" width="30" height="30" alt=""><span>AI时代的审美与网页设计</span></a><p>面向北大与清华学生科幻协会的个人分享。</p><a class="back-top" href="#top">回到开头 ↑</a></footer>
+  <footer class="site-footer"><a class="back-top" href="#top">回到开头 ↑</a></footer>
 </body>
 </html>
