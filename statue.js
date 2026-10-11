@@ -1,12 +1,14 @@
 /* Original faceted relief model, interpreted from the monument's silhouette.
    Three-dimensional vertices, depth-sorted faces and directional light are
-   projected with Canvas 2D. No downloaded mesh, library, texture or telemetry. */
+   projected with Canvas 2D. Stone grain is procedural and fixed to each face.
+   No downloaded mesh, texture, library or telemetry. */
 (()=>{
   'use strict';
   const canvas=document.querySelector('#motherland-model');
   const ctx=canvas?.getContext('2d');
   if(!ctx)return;
   const faces=[];
+  let part='body';
   const stone='#d9d0ae', pale='#e6ddc1', shade='#a9ae94', deep='#818e75';
   const point=([x,y,z=0])=>[(x-321)*1.16,400-y,z];
   const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
@@ -20,7 +22,7 @@
     const v=vertices.map(point);
     const n=normal(v);
     if(n[2]<0){v.reverse();n.forEach((_,i)=>n[i]*=-1);}
-    faces.push({vertices:v,normal:n,color:color.match(/\w\w/g).map(v=>parseInt(v,16))});
+    faces.push({vertices:v,normal:n,part,color:color.match(/\w\w/g).map(v=>parseInt(v,16))});
   }
   // Ear clipping keeps the cape and garment's concave outlines intact.
   function triangulate(vertices){
@@ -67,13 +69,18 @@
   facet([[277,394,9],[322,389,-12],[301,423,-12],[249,428,4]],stone);
 
   // Far arm reaches outward and downward, with an open hand.
+  part='open-hand';
   solid([[352,358],[378,371],[399,382],[423,391],[432,393],[432,404],[446,412],[459,416],[459,420],[447,420],[454,426],[451,429],[439,422],[443,431],[440,433],[431,422],[426,412],[409,411],[385,404],[363,390],[347,378]],2,18,stone,shade);
   facet([[357,364,4],[378,371,4],[409,396,17],[385,394,22]],pale);
   facet([[357,364,4],[385,394,22],[365,390,4],[347,378,4]],shade);
   facet([[385,394,22],[409,396,17],[432,403,9],[423,391,4]],stone);
   facet([[385,394,22],[409,411,4],[426,412,4],[432,403,9]],shade);
+  facet([[431,404,12],[437,412,13],[443,418,12],[440,419,13],[433,413,14]],pale);
+  facet([[435,414,14],[445,420,13],[448,423,12],[442,420,14]],shade);
+  facet([[432,415,13],[439,424,12],[439,428,12],[435,423,13]],pale);
 
   // Main robe: a continuous, solid silhouette under the raised folds.
+  part='body';
   solid([[310,348],[331,350],[350,352],[371,373],[370,405],[384,425],[383,446],[379,469],[392,508],[400,553],[401,603],[414,646],[421,688],[436,718],[425,727],[423,749],[412,756],[373,754],[358,744],[333,752],[315,749],[305,735],[289,726],[285,702],[269,699],[255,687],[231,678],[238,655],[254,626],[265,595],[272,560],[281,526],[267,524],[262,510],[266,478],[277,451],[292,422],[290,390],[296,365]],14,38,stone,deep);
 
   // Long sculpted skirt pleats. Peaks protrude toward the viewer in 3-D.
@@ -95,6 +102,16 @@
   facet([[401,603,17],[414,646,17],[421,688,17],[414,712,31],[394,665,32]],pale);
   facet([[394,665,32],[414,712,31],[436,718,17],[425,727,17],[423,749,17],[395,731,34]],shade);
   facet([[395,731,34],[423,749,17],[412,756,17],[374,750,23]],pale);
+  // Narrow ridges and recesses split the broad pleats, without changing the pose.
+  facet([[298,487,47],[292,518,48],[279,584,37],[281,548,37]],shade);
+  facet([[298,534,44],[301,540,44],[281,624,38],[273,649,33]],pale);
+  facet([[314,499,51],[319,491,51],[307,584,50],[304,593,49]],pale);
+  facet([[335,519,47],[334,546,47],[320,611,53],[324,574,48]],deep);
+  facet([[342,565,51],[345,562,53],[334,650,46],[331,665,44]],pale);
+  facet([[368,500,51],[371,505,50],[365,550,57],[361,563,57]],pale);
+  facet([[375,584,49],[378,579,47],[371,638,47],[365,655,45]],shade);
+  facet([[391,618,34],[392,650,35],[400,693,34],[394,677,35]],pale);
+  facet([[353,675,42],[356,668,43],[361,723,36],[357,730,34]],pale);
 
   // The torso turns toward the open hand; the drape crosses the waist.
   facet([[310,348,17],[320,360,28],[303,392,36],[290,390,17],[296,365,17]],shade);
@@ -118,6 +135,7 @@
   facet([[309,485,70],[310,491,56],[275,521,56],[267,515,56]],stone);
 
   // Raised arm and clenched fist: the gesture leads directly into the blade.
+  part='raised-arm';
   solid([[310,351],[300,362],[285,346],[271,322],[256,291],[241,262],[231,243],[224,226],[217,220],[211,207],[213,199],[213,186],[217,177],[225,177],[233,186],[235,201],[233,214],[236,231],[249,244],[263,264],[277,290],[292,317]],24,23,stone,shade);
   facet([[310,351,26],[292,340,46],[277,306,46],[292,317,26]],stone);
   facet([[292,340,46],[300,362,26],[285,346,26],[271,322,26],[277,306,46]],shade);
@@ -127,10 +145,14 @@
   facet([[241,249,39],[263,278,46],[263,264,26],[249,244,26],[236,231,26]],pale);
   facet([[217,177,26],[226,185,42],[225,210,42],[217,220,26],[211,207,26],[213,186,26]],pale);
   facet([[226,185,42],[235,201,26],[233,214,26],[236,231,26],[225,210,42]],shade);
-  // Finger ridges read as stone, not individually animated parts.
+  // The hand, finger ridges and blade share the same small vertical displacement.
   for(let i=0;i<3;i++)facet([[213,187+i*8,44],[223,184+i*8,47],[228,189+i*8,45],[216,192+i*8,44]],i%2?stone:pale);
+  for(let i=0;i<3;i++)facet([[215,191+i*8,46],[224,188+i*8,48],[226,190+i*8,47],[217,193+i*8,46]],shade);
+  facet([[232,203,40],[234,215,34],[232,225,37],[229,215,43]],pale);
+  facet([[249,255,44],[263,279,47],[270,295,48],[265,290,48]],pale);
 
   // Neck, profile and swept hair, cut into a few deliberate planes.
+  part='body';
   solid([[326,317],[344,319],[347,340],[356,353],[336,369],[314,354],[321,340]],27,22,stone,shade);
   facet([[329,320,42],[344,319,29],[347,340,29],[336,358,49],[324,352,45]],pale);
   solid([[315,293],[326,280],[344,279],[357,286],[362,296],[361,309],[367,318],[373,327],[368,331],[366,339],[359,345],[348,341],[337,332],[321,324],[312,310]],37,29,stone,shade);
@@ -146,16 +168,29 @@
   facet([[331,294,73],[325,307,69],[306,312,66],[289,305,55],[302,299,55]],pale);
   facet([[325,307,69],[319,323,55],[305,329,55],[289,325,55],[284,318,55],[306,312,66]],stone);
   facet([[331,294,73],[353,296,66],[359,299,55],[353,304,55],[338,303,55],[325,310,55],[325,307,69]],shade);
+  // Carved hair ribbons, brow, cheek and lips remain stone-toned, not outlined.
+  facet([[319,288,68],[337,287,70],[348,291,69],[333,289,74],[306,302,67]],pale);
+  facet([[311,302,70],[329,296,75],[337,297,74],[319,302,73],[300,311,68]],deep);
+  facet([[302,316,69],[319,311,71],[323,309,71],[317,316,67],[296,323,62]],pale);
+  facet([[350,307,61],[356,310,63],[361,312,57],[356,312,63]],pale);
+  facet([[357,314,62],[360,314,59],[361,316,56],[358,315,62]],deep);
+  facet([[358,319,58],[361,323,55],[365,326,49],[359,325,57]],stone);
+  facet([[357,331,54],[365,332,44],[366,334,43],[359,334,52]],deep);
+  facet([[356,335,53],[359,336,51],[363,337,45],[359,339,49]],pale);
 
   // A long beveled sword, held above the body and angled toward the open sky.
+  part='sword';
   solid([[223,192],[215,186],[221,166],[230,161],[233,174]],30,10,shade,deep);
   solid([[224,170],[231,159],[315,27],[324,20],[322,32],[239,172]],28,6,stone,deep);
   facet([[224,170,30],[231,159,30],[320,24,33],[233,167,40]],pale);
   facet([[233,167,40],[320,24,33],[322,32,30],[239,172,30]],shade);
   solid([[213,166],[222,158],[239,181],[237,193]],34,7,shade,deep);
   facet([[222,158,36],[226,172,46],[237,193,36],[213,166,36]],stone);
+  facet([[238,158,40],[315,33,35],[240,157,40]],pale);
+  facet([[219,165,44],[221,164,46],[234,183,43],[232,182,44]],pale);
 
   // Feet and a low architectural plinth echo the opening monument.
+  part='body';
   solid([[331,733],[340,739],[350,746],[353,752],[344,756],[319,754],[320,748]],52,12,pale,shade);
   solid([[388,733],[398,738],[411,749],[410,756],[374,756],[374,750]],35,12,stone,shade);
   for(let i=0;i<4;i++)facet([[327+i*5,746,67],[330+i*5,748,68],[331+i*5,754,67],[328+i*5,754,67]],stone);
@@ -163,8 +198,37 @@
   facet([[232,758,30],[232,758,-33],[432,758,-33],[432,758,30]],pale);
   solid([[216,777],[448,777],[448,785],[216,785]],42,84,shade,deep);
   facet([[216,777,42],[216,777,-42],[448,777,-42],[448,777,42]],stone);
+  facet([[233,770,31],[431,770,31],[431,772,31],[233,772,31]],shade);
+  facet([[219,779,43],[445,779,43],[445,780,43],[219,780,43]],pale);
 
-  let width=0,height=0,dpr=1,frame=0,lastTime=null,elapsed=0,visible=false;
+  // Deterministic pores and mineral flecks are attached to the geometry.
+  // Their positions never change from frame to frame, so the stone does not shimmer.
+  let seed=210310;
+  const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  let grainCount=0;
+  for(const f of faces){
+    f.grain=[];
+    for(let i=1;i<f.vertices.length-1;i++){
+      const a=f.vertices[0],b=f.vertices[i],c=f.vertices[i+1];
+      const area=Math.hypot(...cross(subtract(b,a),subtract(c,a)))/2;
+      const count=Math.min(80,Math.floor(area/75));
+      for(let j=0;j<count;j++){
+        const u=Math.sqrt(random()),v=random();
+        f.grain.push({position:a.map((n,k)=>n*(1-u)+b[k]*u*(1-v)+c[k]*u*v),size:.28+random()*.42,pale:random()>.6,long:random()>.94});
+      }
+    }
+    grainCount+=f.grain.length;
+  }
+
+  let width=0,height=0,dpr=1,frame=0,lastTime=null,lastPaint=-Infinity,elapsed=0,visible=false;
+  const clamp=v=>Math.max(0,Math.min(1,v));
+  function articulate(v,part,phase){
+    let lift=0;
+    if(part==='sword')lift=Math.sin(phase*.85)*4.3;
+    if(part==='raised-arm')lift=Math.sin(phase*.85)*4.3*clamp((v[1]-48)/130);
+    if(part==='open-hand')lift=Math.sin(phase*.85+.7)*4.1*clamp((v[0]/1.16+321-350)/88);
+    return [v[0],v[1]+lift,v[2]];
+  }
   const rotate=(v,yaw,pitch)=>{
     const x=v[0]*Math.cos(yaw)+v[2]*Math.sin(yaw);
     const z=-v[0]*Math.sin(yaw)+v[2]*Math.cos(yaw);
@@ -174,7 +238,9 @@
     if(!width||!height)return;
     const phase=elapsed/1000;
     const yaw=.12+Math.sin(phase*.24)*.065, pitch=-.045;
-    const scale=Math.min(width/410,height/820);
+    // 150% of the previous model scale, with proportionally taller viewports.
+    const baseWidth=innerWidth<=700?Math.min(canvas.parentElement.parentElement.clientWidth*.85,360):innerWidth<=1000?width-60:width;
+    const scale=1.5*Math.min(baseWidth/410,height/1230);
     const light=[-.38+Math.sin(phase*.17)*.06,.42,.82];
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.clearRect(0,0,width,height);
@@ -182,10 +248,10 @@
     ctx.beginPath();ctx.ellipse(width*.5,height*.975,scale*151,scale*10,0,0,Math.PI*2);ctx.fill();
     const project=v=>[width*.5+v[0]*scale,height*.5-v[1]*scale];
     const sorted=faces.map(f=>{
-      const vertices=f.vertices.map(v=>rotate(v,yaw,pitch));
+      const vertices=f.vertices.map(v=>rotate(articulate(v,f.part,phase),yaw,pitch));
       const n=rotate(f.normal,yaw,pitch);
       const shadeAmount=.84+Math.max(0,n.reduce((s,v,i)=>s+v*light[i],0))*.16;
-      return {vertices,depth:vertices.reduce((s,v)=>s+v[2],0)/vertices.length,
+      return {vertices,source:f,depth:vertices.reduce((s,v)=>s+v[2],0)/vertices.length,
         color:`rgb(${f.color.map(c=>Math.round(c*shadeAmount)).join(',')})`};
     }).sort((a,b)=>a.depth-b.depth);
     for(const f of sorted){
@@ -194,7 +260,20 @@
       ctx.closePath();ctx.fillStyle=f.color;ctx.fill();
       // Subpixel seams between touching facets should not look like wireframe.
       ctx.strokeStyle=f.color;ctx.lineWidth=.35;ctx.stroke();
+      if(f.source.grain.length){
+        ctx.save();ctx.clip();
+        for(const grain of f.source.grain){
+          const p=project(rotate(articulate(grain.position,f.source.part,phase),yaw,pitch));
+          ctx.fillStyle=grain.pale?'rgba(250,244,220,.32)':'rgba(67,73,56,.16)';
+          const size=grain.size*scale;
+          ctx.fillRect(p[0],p[1],grain.long?size*.65:size,grain.long?size*3.6:size);
+        }
+        ctx.restore();
+      }
     }
+    canvas.dataset.modelScale=scale.toFixed(5);
+    canvas.dataset.swordLift=(Math.sin(phase*.85)*4.3*scale).toFixed(3);
+    canvas.dataset.handLift=(Math.sin(phase*.85+.7)*4.1*scale).toFixed(3);
     canvas.dataset.ready='true';
   }
   function resize(){
@@ -204,7 +283,9 @@
   }
   function tick(now){
     if(lastTime!==null)elapsed+=Math.min(now-lastTime,100);
-    lastTime=now;draw();frame=requestAnimationFrame(tick);
+    lastTime=now;
+    if(now-lastPaint>=1000/30){draw();lastPaint=now;}
+    frame=requestAnimationFrame(tick);
   }
   function sync(){
     const running=visible&&!document.hidden&&document.documentElement.dataset.motion==='on';
@@ -213,6 +294,7 @@
     canvas.dataset.animating=String(running);
   }
   canvas.dataset.faces=String(faces.length);
+  canvas.dataset.grains=String(grainCount);
   new ResizeObserver(resize).observe(canvas);
   new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();}).observe(canvas);
   document.addEventListener('aesthetics:motion',sync);
