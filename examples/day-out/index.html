@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="公园、书店与咖啡，给周末留一点空白。">
+  <meta name="referrer" content="no-referrer">
+  <title>周末 · 出去走走</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span class="dot-field"></span><span class="checker-field"></span><span class="slash"></span></div>
+  <main>
+    <header class="page-heading">
+      <div class="brand-slot"><h1 id="brand-title">出去走走</h1></div>
+      <button id="motion-toggle" type="button" aria-pressed="true" hidden><span class="motion-icon" aria-hidden="true"></span><span id="motion-label">动态：开</span></button>
+    </header>
+    <section class="plan-intro" aria-labelledby="plan-title">
+      <button id="date-sticker" class="date-sticker" type="button" aria-label="周末出游，重播入场动效"><span class="date-number">SAT</span><span class="date-caption">给周末留一点空白</span></button>
+      <div class="plan-heading"><h2 id="plan-title">去公园，逛书店。</h2><p id="plan-area">带上好奇心，走走停停。没有必须打卡的地方。</p></div>
+    </section>
+    <div class="summary"><span id="plan-hours">半天，慢慢走</span><span id="plan-budget">不赶时间</span></div>
+    <ol id="timeline" class="timeline" aria-label="周末出游路线"></ol>
+    <details id="details"><summary>出门前，带上这些</summary><p>一双好走的鞋、水、一点零食。想读的书也可以放进包里。</p></details>
+  </main>
+</body>
+</html>
